@@ -111,32 +111,34 @@ function App() {
   };
 
   const sendAudio = async (blob) => {
-    setLoading(true);
-    setError("");
-    setReplyText("");
-    setReplyAudioUrl("");
-    try {
-      const formData = new FormData();
-      formData.append("file", blob, "voice.webm");
-      const res = await fetch(`${API_BASE}/chat/audio`, {
-        method: "POST",
-        body: formData,
-      });
-      if (!res.ok) throw new Error("Backend error");
-      const data = await res.json();
-      const audioPath = `${API_BASE}/audio/${data.audio_url.split("/").pop()}`;
-      setReplyText(data.text);
-      setReplyAudioUrl(audioPath);
-      setChatLog((log) => [
-        ...log,
-        { role: "user", text: "[Voice Message]" },
-        { role: "bot", text: data.text, audioUrl: audioPath },
-      ]);
-    } catch (e) {
-      setError("Failed to connect to backend.");
-    }
-    setLoading(false);
-  };
+  setLoading(true);
+  setError("");
+  setReplyText("");
+  setReplyAudioUrl("");
+  try {
+    const formData = new FormData();
+    formData.append("file", blob, "voice.webm");
+    const res = await fetch(`${API_BASE}/chat/audio`, {
+      method: "POST",
+      body: formData,
+    });
+    if (!res.ok) throw new Error("Backend error");
+    const data = await res.json();
+
+    const audioPath = `${API_BASE}/audio/${data.audio_url.split("/").pop()}`;
+    setReplyText(data.text);
+    setReplyAudioUrl(audioPath);
+    setChatLog((log) => [
+      ...log,
+      { role: "user", text: data.user_transcript }, // 👈 Show transcribed voice input
+      { role: "bot", text: data.text, audioUrl: audioPath },
+    ]);
+  } catch (e) {
+    setError("Failed to connect to backend.");
+  }
+  setLoading(false);
+};
+
 
   const sendChatText = async () => {
     if (!chatInput.trim()) return;
