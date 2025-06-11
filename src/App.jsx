@@ -164,7 +164,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-bl from-gray-800 via-gray-900 to-black text-white flex flex-col items-center justify-center p-6">
-      <h1 className="text-4xl font-bold mb-6 drop-shadow-lg">Hotel Voice Assistant</h1>
+      <h1 className="text-4xl font-bold mb-6 drop-shadow-lg">Book Now</h1>
 
       <MicWithRipple
         listening={recording}
