@@ -164,7 +164,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-bl from-gray-800 via-gray-900 to-black text-white flex flex-col items-center justify-center p-6">
-      <h1 className="text-4xl font-bold mb-6 drop-shadow-lg">Book Now</h1>
+      <h1 className="text-4xl font-bold mb-6 drop-shadow-lg">Book now</h1>
 
       <MicWithRipple
         listening={recording}
@@ -191,7 +191,7 @@ function App() {
 
       <button
         onClick={() => setShowChatLog((prev) => !prev)}
-        className="mt-8 px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg shadow-lg"
+        className="mt-8 px-6 py-2 bg-cyan-500 hover:bg-cyan-600 hover:scale-105 text-white rounded-lg shadow-lg transition-all duration-300"
       >
         {showChatLog ? "Hide Chat Log" : "Show Chat Log"}
       </button>
